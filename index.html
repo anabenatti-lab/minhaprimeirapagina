@@ -2,325 +2,522 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tratamento da Água e do Esgoto</title>
-
+    <title>Água em Transformação | Tratamento de Água e Esgoto</title>
 
     <style>
 
-        /* =========================
+        /* =====================================================
            CONFIGURAÇÕES GERAIS
-           ========================= */
+        ===================================================== */
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background-color: #eef8ff;
-            color: #17324d;
-            line-height: 1.7;
+            background: #06131f;
+            color: #dbeafe;
+            min-height: 100vh;
+        }
+
+        button {
+            font-family: inherit;
         }
 
 
-        /* =========================
+        /* =====================================================
            CABEÇALHO
-           ========================= */
+        ===================================================== */
 
         header {
-            background: linear-gradient(135deg, #075985, #0ea5e9);
-            color: white;
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 60px 20px;
+            padding: 50px 20px;
+
+            background:
+                radial-gradient(circle at 20% 20%, #0e7490 0, transparent 30%),
+                radial-gradient(circle at 80% 70%, #0369a1 0, transparent 35%),
+                linear-gradient(135deg, #020617, #082f49, #06131f);
+
+            border-bottom: 1px solid #164e63;
+        }
+
+        .tag {
+            border: 1px solid #22d3ee;
+            color: #67e8f9;
+            padding: 7px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
         header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
+            font-size: clamp(38px, 7vw, 75px);
+            color: white;
+            max-width: 1000px;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        header h1 span {
+            color: #22d3ee;
         }
 
         header p {
-            font-size: 19px;
+            max-width: 750px;
+            color: #bae6fd;
+            font-size: 18px;
         }
 
 
-        /* =========================
-           MENU
-           ========================= */
+        /* =====================================================
+           NAVEGAÇÃO
+        ===================================================== */
 
         nav {
-            background-color: #064e70;
-            text-align: center;
-            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            padding: 12px;
+
+            background: rgba(2, 15, 27, 0.96);
+            border-bottom: 1px solid #164e63;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
+        nav button {
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid transparent;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
             font-weight: bold;
-            margin: 0 12px;
+            transition: 0.25s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        nav button:hover,
+        nav button.active {
+            color: #67e8f9;
+            background: #083344;
+            border-color: #155e75;
         }
 
 
-        /* =========================
+        /* =====================================================
            CONTEÚDO
-           ========================= */
+        ===================================================== */
 
         main {
-            max-width: 1100px;
-            margin: auto;
-            padding: 35px 20px;
+            width: min(1150px, 92%);
+            margin: 45px auto;
         }
 
-        section {
-            background-color: white;
-            padding: 30px;
+        .pagina {
+            display: none;
+            animation: aparecer 0.35s ease;
+        }
+
+        .pagina.active {
+            display: block;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           TÍTULOS
+        ===================================================== */
+
+        .titulo-secao {
             margin-bottom: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .numero {
+            color: #22d3ee;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
         h2 {
-            color: #0369a1;
-            margin-bottom: 18px;
-            font-size: 29px;
+            color: white;
+            font-size: clamp(30px, 5vw, 48px);
+            margin: 8px 0 12px;
         }
 
         h3 {
-            color: #075985;
-            margin-top: 25px;
-            margin-bottom: 10px;
+            color: #67e8f9;
+            margin-bottom: 12px;
         }
 
         p {
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+
+        /* =====================================================
+           CARDS
+        ===================================================== */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #0b2235, #071a2a);
+            border: 1px solid #164e63;
+            border-radius: 16px;
+            padding: 24px;
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #22d3ee;
+        }
+
+        .icone {
+            font-size: 30px;
             margin-bottom: 15px;
         }
 
+        .card h3 {
+            font-size: 20px;
+        }
 
-        /* =========================
-           DESTAQUES
-           ========================= */
+
+        /* =====================================================
+           DESTAQUE
+        ===================================================== */
 
         .destaque {
-            background-color: #e0f2fe;
-            border-left: 6px solid #0284c7;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
+            background: linear-gradient(135deg, #083344, #082f49);
+            border: 1px solid #0e7490;
+            border-left: 5px solid #22d3ee;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 25px 0;
+        }
+
+        .destaque strong {
+            color: #67e8f9;
         }
 
 
-        /* =========================
+        /* =====================================================
            QUÍMICA
-           ========================= */
+        ===================================================== */
 
-        .quimica {
-            background-color: #f0f9ff;
-            border: 2px solid #7dd3fc;
+        .reacao {
+            background: #020617;
+            border: 1px solid #164e63;
             border-radius: 12px;
-            padding: 25px;
-        }
-
-        .quimica h3 {
-            color: #075985;
-        }
-
-
-        /* =========================
-           ETAPAS
-           ========================= */
-
-        .etapas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 18px;
-            margin-top: 25px;
-        }
-
-        .etapa {
-            background-color: #f0f9ff;
-            border: 1px solid #bae6fd;
-            padding: 20px;
-            border-radius: 12px;
-        }
-
-        .etapa strong {
-            color: #0369a1;
-            font-size: 18px;
-        }
-
-
-        /* =========================
-           FÓRMULAS
-           ========================= */
-
-        .formula {
-            background-color: #f1f5f9;
-            border-radius: 10px;
-            padding: 18px;
-            margin: 18px 0;
-            font-family: "Courier New", monospace;
-            font-size: 18px;
+            padding: 22px;
+            margin: 20px 0;
             text-align: center;
         }
 
+        .reacao .equacao {
+            color: #67e8f9;
+            font-family: monospace;
+            font-size: 21px;
+            margin: 12px 0;
+        }
 
-        /* =========================
+        .reacao small {
+            color: #94a3b8;
+        }
+
+
+        /* =====================================================
+           FLUXO DO TRATAMENTO
+        ===================================================== */
+
+        .fluxo {
+            display: flex;
+            align-items: stretch;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0 20px;
+        }
+
+        .fluxo-item {
+            min-width: 170px;
+            padding: 18px;
+            text-align: center;
+            background: #082f49;
+            border: 1px solid #155e75;
+            border-radius: 12px;
+        }
+
+        .seta {
+            display: flex;
+            align-items: center;
+            color: #22d3ee;
+            font-size: 25px;
+        }
+
+
+        /* =====================================================
            TABELAS
-           ========================= */
+        ===================================================== */
+
+        .tabela-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th,
-        td {
-            border: 1px solid #bae6fd;
-            padding: 13px;
-            text-align: left;
+            min-width: 650px;
         }
 
         th {
-            background-color: #0369a1;
+            background: #075985;
             color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #164e63;
+            color: #cbd5e1;
         }
 
         tr:nth-child(even) {
-            background-color: #f0f9ff;
+            background: #071f31;
         }
 
 
-        /* =========================
+        /* =====================================================
            GRÁFICO
-           ========================= */
+           ===================================================== */
 
         .grafico {
-            background-color: #f8fcff;
-            border: 1px solid #bae6fd;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px auto;
-            max-width: 900px;
+            background: #020b14;
+            border: 1px solid #164e63;
+            border-radius: 18px;
+            padding: 28px;
+            margin: 25px 0;
         }
 
-        .cidade {
+        .grafico-titulo {
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        .cidade h4 {
-            color: #075985;
-            font-size: 20px;
-            margin-bottom: 12px;
+        .eixo {
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .cidade-grafico {
+            margin-bottom: 32px;
+        }
+
+        .cidade-nome {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
         .barra-linha {
-            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
         }
 
-        .legenda {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .rotulo {
+            width: 125px;
+            font-size: 13px;
+            color: #94a3b8;
         }
 
-        .barra {
-            width: 100%;
-            height: 30px;
-            background-color: #dbeafe;
-            border-radius: 15px;
+        .barra-fundo {
+            flex: 1;
+            height: 27px;
+            background: #0f2435;
+            border-radius: 6px;
             overflow: hidden;
         }
 
-        .barra-agua {
+        .barra {
             height: 100%;
-            background-color: #0ea5e9;
-            border-radius: 15px;
-        }
-
-        .barra-esgoto {
-            height: 100%;
-            background-color: #075985;
-            border-radius: 15px;
-        }
-
-        .legenda-grafico {
-            margin-top: 20px;
+            border-radius: 6px;
             display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .item-legenda {
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: white;
+            font-size: 12px;
             font-weight: bold;
         }
 
-        .quadrado-agua {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            background-color: #0ea5e9;
-            margin-right: 5px;
+        .agua {
+            background: linear-gradient(90deg, #0284c7, #22d3ee);
         }
 
-        .quadrado-esgoto {
+        .esgoto {
+            background: linear-gradient(90deg, #075985, #38bdf8);
+        }
+
+        .legenda-grafico {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            color: #cbd5e1;
+        }
+
+        .bolinha {
             display: inline-block;
-            width: 15px;
-            height: 15px;
-            background-color: #075985;
-            margin-right: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            margin-right: 6px;
         }
 
 
-        /* =========================
+        /* =====================================================
+           MATEMÁTICA
+        ===================================================== */
+
+        .formula {
+            background: #020617;
+            border: 1px solid #164e63;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            color: #67e8f9;
+            font-family: monospace;
+            font-size: 19px;
+            margin: 20px 0;
+        }
+
+
+        /* =====================================================
+           INDICADORES
+        ===================================================== */
+
+        .indicadores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .indicador {
+            background: #082f49;
+            border: 1px solid #155e75;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .indicador .numero-grande {
+            color: #22d3ee;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .indicador span {
+            display: block;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
            RODAPÉ
-           ========================= */
+        ===================================================== */
 
         footer {
-            background-color: #064e70;
-            color: white;
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
+            border-top: 1px solid #164e63;
+            background: #020617;
+        }
+
+        footer p {
+            color: #64748b;
+            font-size: 14px;
         }
 
 
-        /* =========================
-           CELULAR
-           ========================= */
+        /* =====================================================
+           RESPONSIVIDADE
+        ===================================================== */
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
-            header h1 {
-                font-size: 30px;
+            nav {
+                position: relative;
             }
 
-            header p {
-                font-size: 16px;
+            .barra-linha {
+                display: block;
             }
 
-            nav a {
-                display: inline-block;
-                margin: 5px;
+            .rotulo {
+                display: block;
+                width: auto;
+                margin-bottom: 5px;
             }
 
-            section {
-                padding: 20px;
+            .grafico {
+                padding: 18px;
             }
 
-            table {
-                font-size: 14px;
+            .fluxo {
+                flex-direction: column;
+            }
+
+            .seta {
+                justify-content: center;
+                transform: rotate(90deg);
             }
 
         }
@@ -333,36 +530,55 @@
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      CABEÇALHO
-     ========================= -->
+===================================================== -->
 
 <header>
 
-    <h1>💧 Tratamento da Água e do Esgoto</h1>
+    <div class="tag">Projeto interdisciplinar</div>
+
+    <h1>
+        Água em <span>Transformação</span>
+    </h1>
 
     <p>
-        Química, Biologia e Matemática aplicadas ao saneamento
+        Tratamento da água e do esgoto através da
+        Química, Biologia e Matemática
     </p>
 
 </header>
 
 
-<!-- =========================
-     MENU
-     ========================= -->
+<!-- =====================================================
+     MENU INTERATIVO
+===================================================== -->
 
 <nav>
 
-    <a href="#agua">Água</a>
+    <button class="tab active" onclick="abrirPagina('inicio', this)">
+        Visão geral
+    </button>
 
-    <a href="#quimica">Química</a>
+    <button class="tab" onclick="abrirPagina('agua', this)">
+        💧 Água
+    </button>
 
-    <a href="#esgoto">Esgoto</a>
+    <button class="tab" onclick="abrirPagina('quimica', this)">
+        🧪 Química
+    </button>
 
-    <a href="#biologia">Biologia</a>
+    <button class="tab" onclick="abrirPagina('esgoto', this)">
+        ♻️ Esgoto
+    </button>
 
-    <a href="#matematica">Matemática</a>
+    <button class="tab" onclick="abrirPagina('biologia', this)">
+        🦠 Biologia
+    </button>
+
+    <button class="tab" onclick="abrirPagina('matematica', this)">
+        📊 Matemática
+    </button>
 
 </nav>
 
@@ -370,661 +586,55 @@
 <main>
 
 
-<!-- =========================
-     INTRODUÇÃO
-     ========================= -->
+<!-- =====================================================
+     INÍCIO
+===================================================== -->
 
-<section>
+<section id="inicio" class="pagina active">
 
-    <h2>Introdução</h2>
+    <div class="titulo-secao">
 
-    <p>
-        A água é um recurso essencial para a vida, para a agricultura,
-        para a indústria e para diversas atividades do nosso cotidiano.
-        Porém, a água encontrada na natureza pode conter partículas,
-        microrganismos e diferentes substâncias químicas.
-    </p>
+        <div class="numero">01 — Introdução</div>
 
-    <p>
-        Por isso, ela precisa passar por processos de tratamento antes
-        de ser distribuída para a população. O esgoto também precisa
-        ser tratado antes de retornar ao meio ambiente.
-    </p>
-
-    <div class="destaque">
-
-        <strong>
-            A Química possui um papel muito importante no saneamento.
-        </strong>
-
-        Ela permite compreender as substâncias utilizadas no tratamento,
-        as reações químicas, o pH, as concentrações e os processos de
-        desinfecção e remoção de impurezas.
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     TRATAMENTO DA ÁGUA
-     ========================= -->
-
-<section id="agua">
-
-    <h2>1. Tratamento da água</h2>
-
-    <p>
-        O tratamento da água acontece em uma Estação de Tratamento de
-        Água (ETA). O objetivo é remover partículas, impurezas e
-        microrganismos que podem prejudicar a qualidade da água.
-    </p>
-
-
-    <div class="etapas">
-
-
-        <div class="etapa">
-
-            <strong>1. Captação</strong>
-
-            <p>
-                A água é retirada de rios, represas ou outras fontes
-                utilizadas para o abastecimento.
-            </p>
-
-        </div>
-
-
-        <div class="etapa">
-
-            <strong>2. Coagulação</strong>
-
-            <p>
-                Produtos químicos ajudam a reunir pequenas partículas
-                presentes na água.
-            </p>
-
-        </div>
-
-
-        <div class="etapa">
-
-            <strong>3. Floculação</strong>
-
-            <p>
-                As partículas se unem e formam flocos maiores.
-            </p>
-
-        </div>
-
-
-        <div class="etapa">
-
-            <strong>4. Decantação</strong>
-
-            <p>
-                Os flocos se depositam no fundo dos tanques pela ação
-                da gravidade.
-            </p>
-
-        </div>
-
-
-        <div class="etapa">
-
-            <strong>5. Filtração</strong>
-
-            <p>
-                A água passa por filtros que retêm partículas que
-                permaneceram após a decantação.
-            </p>
-
-        </div>
-
-
-        <div class="etapa">
-
-            <strong>6. Desinfecção</strong>
-
-            <p>
-                Substâncias à base de cloro são utilizadas para
-                inativar diversos microrganismos.
-            </p>
-
-        </div>
-
-
-        <div class="etapa">
-
-            <strong>7. Fluoretação</strong>
-
-            <p>
-                O fluoreto pode ser adicionado à água de abastecimento
-                para auxiliar na prevenção de cáries.
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     QUÍMICA
-     ========================= -->
-
-<section id="quimica">
-
-    <h2>🧪 2. Química no tratamento da água</h2>
-
-
-    <div class="quimica">
-
-
-        <h3>Coagulação</h3>
+        <h2>Por que tratar a água?</h2>
 
         <p>
-            Na coagulação, produtos químicos são adicionados à água para
-            favorecer a união das partículas muito pequenas que estão
-            suspensas nela.
+            A água que encontramos na natureza não é necessariamente
+            adequada para o consumo humano. Ela pode carregar partículas,
+            matéria orgânica, sais, microrganismos e outras substâncias.
         </p>
-
-        <p>
-            Um dos coagulantes que pode ser utilizado em sistemas de
-            tratamento é o sulfato de alumínio.
-        </p>
-
-
-        <h3>Floculação</h3>
-
-        <p>
-            Depois da coagulação, a água é misturada lentamente. Isso
-            favorece o encontro das partículas, formando flocos maiores.
-        </p>
-
-
-        <h3>Decantação</h3>
-
-        <p>
-            Os flocos formados possuem maior massa e podem se depositar
-            no fundo do tanque pela ação da gravidade.
-        </p>
-
-
-        <h3>Desinfecção e cloro</h3>
-
-        <p>
-            O cloro é muito importante para a desinfecção da água.
-            Quando o cloro molecular entra em contato com a água,
-            pode ocorrer a formação de ácido hipocloroso.
-        </p>
-
-
-        <div class="formula">
-
-            Cl₂ + H₂O ⇌ HCl + HClO
-
-        </div>
-
-
-        <p>
-            O ácido hipocloroso (HClO) possui ação desinfetante e
-            contribui para a inativação de diversos microrganismos.
-        </p>
-
-
-        <h3>pH</h3>
-
-        <p>
-            O pH indica se uma solução apresenta caráter ácido, neutro
-            ou básico. O controle do pH é importante porque diferentes
-            processos químicos dependem das condições do meio.
-        </p>
-
-
-        <h3>Concentração</h3>
-
-        <p>
-            A concentração representa a quantidade de uma substância
-            presente em determinada quantidade de solução. No tratamento
-            da água, é necessário controlar corretamente a quantidade
-            dos produtos utilizados.
-        </p>
-
 
     </div>
 
-</section>
 
+    <div class="grid">
 
-<!-- =========================
-     TRATAMENTO DO ESGOTO
-     ========================= -->
+        <div class="card">
 
-<section id="esgoto">
+            <div class="icone">🧪</div>
 
-    <h2>3. Tratamento do esgoto</h2>
-
-    <p>
-        O esgoto doméstico contém matéria orgânica, sólidos, nutrientes,
-        microrganismos e outras substâncias. O tratamento reduz esses
-        poluentes antes que a água seja devolvida ao ambiente.
-    </p>
-
-
-    <div class="etapas">
-
-
-        <div class="etapa">
-
-            <strong>Gradeamento</strong>
+            <h3>Química</h3>
 
             <p>
-                Retira objetos maiores, como plásticos, papéis e outros
-                resíduos.
+                Explica as substâncias utilizadas no tratamento, as
+                reações químicas, o pH, a concentração e a desinfecção.
             </p>
 
         </div>
 
 
-        <div class="etapa">
+        <div class="card">
 
-            <strong>Desarenação</strong>
+            <div class="icone">🦠</div>
+
+            <h3>Biologia</h3>
 
             <p>
-                Remove areia e partículas mais pesadas presentes no esgoto.
+                Explica os microrganismos, a decomposição da matéria
+                orgânica e as doenças relacionadas à água contaminada.
             </p>
 
         </div>
 
 
-        <div class="etapa">
-
-            <strong>Decantação</strong>
-
-            <p>
-                Parte dos sólidos presentes no esgoto se deposita no
-                fundo dos tanques.
-            </p>
-
-        </div>
-
-
-        <div class="etapa">
-
-            <strong>Tratamento biológico</strong>
-
-            <p>
-                Microrganismos ajudam a decompor a matéria orgânica.
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-    <h3>DBO — Demanda Bioquímica de Oxigênio</h3>
-
-    <p>
-        A DBO está relacionada à quantidade de oxigênio necessária para
-        a decomposição biológica da matéria orgânica presente na água.
-    </p>
-
-    <div class="formula">
-
-        Matéria orgânica + O₂ → CO₂ + H₂O + energia
-
-    </div>
-
-
-    <div class="destaque">
-
-        Uma quantidade muito grande de matéria orgânica pode aumentar
-        o consumo de oxigênio da água e prejudicar os organismos
-        aquáticos.
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     BIOLOGIA
-     ========================= -->
-
-<section id="biologia">
-
-    <h2>🦠 4. Biologia: contaminação e doenças</h2>
-
-    <p>
-        A Biologia ajuda a compreender os microrganismos presentes na
-        água e no esgoto. Alguns participam da decomposição da matéria
-        orgânica, enquanto outros podem causar doenças.
-    </p>
-
-
-    <table>
-
-        <tr>
-
-            <th>Doença</th>
-
-            <th>Agente causador</th>
-
-            <th>Relação com a água</th>
-
-        </tr>
-
-
-        <tr>
-
-            <td>Cólera</td>
-
-            <td>Bactéria</td>
-
-            <td>
-                Pode ocorrer pela ingestão de água ou alimentos
-                contaminados.
-            </td>
-
-        </tr>
-
-
-        <tr>
-
-            <td>Leptospirose</td>
-
-            <td>Bactéria</td>
-
-            <td>
-                Pode ocorrer pelo contato com água ou lama contaminada.
-            </td>
-
-        </tr>
-
-
-        <tr>
-
-            <td>Hepatite A</td>
-
-            <td>Vírus</td>
-
-            <td>
-                Pode ser transmitida pela ingestão de água ou alimentos
-                contaminados.
-            </td>
-
-        </tr>
-
-
-        <tr>
-
-            <td>Giardíase</td>
-
-            <td>Protozoário</td>
-
-            <td>
-                Pode ocorrer pela ingestão de água contaminada.
-            </td>
-
-        </tr>
-
-
-        <tr>
-
-            <td>Amebíase</td>
-
-            <td>Protozoário</td>
-
-            <td>
-                Pode ser transmitida por água ou alimentos contaminados.
-            </td>
-
-        </tr>
-
-
-        <tr>
-
-            <td>Esquistossomose</td>
-
-            <td>Verme parasita</td>
-
-            <td>
-                Está relacionada ao contato com água doce onde ocorre
-                o ciclo do parasita.
-            </td>
-
-        </tr>
-
-
-    </table>
-
-</section>
-
-
-<!-- =========================
-     MATEMÁTICA
-     ========================= -->
-
-<section id="matematica">
-
-    <h2>📊 5. Matemática e análise de dados</h2>
-
-    <p>
-        A Matemática permite analisar dados sobre saneamento por meio
-        de porcentagens, tabelas e gráficos. Dessa maneira, podemos
-        comparar diferentes cidades.
-    </p>
-
-
-    <h3>Porcentagem</h3>
-
-    <div class="formula">
-
-        Porcentagem = (parte ÷ total) × 100
-
-    </div>
-
-
-    <p>
-        Por exemplo, se 90.000 pessoas de uma população de 100.000
-        possuem acesso à água tratada:
-    </p>
-
-
-    <div class="formula">
-
-        (90.000 ÷ 100.000) × 100 = 90%
-
-    </div>
-
-
-    <!-- =========================
-         GRÁFICO
-         ========================= -->
-
-    <h3>Gráfico: água tratada e coleta de esgoto</h3>
-
-    <p>
-        O gráfico compara os índices de água tratada e coleta de esgoto
-        de Maringá, Curitiba e Londrina.
-    </p>
-
-
-    <div class="grafico">
-
-
-        <!-- MARINGÁ -->
-
-        <div class="cidade">
-
-            <h4>Maringá</h4>
-
-
-            <div class="barra-linha">
-
-                <span class="legenda">
-                    Água tratada — 93,1%
-                </span>
-
-                <div class="barra">
-
-                    <div
-                        class="barra-agua"
-                        style="width: 93.1%;">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="barra-linha">
-
-                <span class="legenda">
-                    Coleta de esgoto — 99,5%
-                </span>
-
-                <div class="barra">
-
-                    <div
-                        class="barra-esgoto"
-                        style="width: 99.5%;">
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CURITIBA -->
-
-        <div class="cidade">
-
-            <h4>Curitiba</h4>
-
-
-            <div class="barra-linha">
-
-                <span class="legenda">
-                    Água tratada — 99,6%
-                </span>
-
-                <div class="barra">
-
-                    <div
-                        class="barra-agua"
-                        style="width: 99.6%;">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="barra-linha">
-
-                <span class="legenda">
-                    Coleta de esgoto — 96,9%
-                </span>
-
-                <div class="barra">
-
-                    <div
-                        class="barra-esgoto"
-                        style="width: 96.9%;">
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- LONDRINA -->
-
-        <div class="cidade">
-
-            <h4>Londrina</h4>
-
-
-            <div class="barra-linha">
-
-                <span class="legenda">
-                    Água tratada — 98,2%
-                </span>
-
-                <div class="barra">
-
-                    <div
-                        class="barra-agua"
-                        style="width: 98.2%;">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="barra-linha">
-
-                <span class="legenda">
-                    Coleta de esgoto — 96,7%
-                </span>
-
-                <div class="barra">
-
-                    <div
-                        class="barra-esgoto"
-                        style="width: 96.7%;">
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- LEGENDA -->
-
-        <div class="legenda-grafico">
-
-            <span class="item-legenda">
-
-                <span class="quadrado-agua"></span>
-
-                Água tratada
-
-            </span>
-
-
-            <span class="item-legenda">
-
-                <span class="quadrado-esgoto"></span>
-
-                Coleta de esgoto
-
-            </span>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- TABELA DOS DADOS DO GRÁFICO -->
-
-    <h3>Dados utilizados no gráfico</h3>
-
-
-    <table>
-
-        <tr>
+        <div class="card">
