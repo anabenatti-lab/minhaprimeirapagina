@@ -1,330 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Água em Transformação</title>
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #06131f;
-    color: #dbeafe;
-    line-height: 1.7;
-}
-
-/* CABEÇALHO */
-header {
-    min-height: 330px;
-    padding: 60px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background:
-        radial-gradient(circle at 20% 20%, #0e7490, transparent 30%),
-        radial-gradient(circle at 80% 70%, #0369a1, transparent 35%),
-        linear-gradient(135deg, #020617, #082f49, #06131f);
-}
-
-header .tag {
-    border: 1px solid #22d3ee;
-    color: #67e8f9;
-    padding: 6px 15px;
-    border-radius: 30px;
-    font-size: 13px;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    color: white;
-    font-size: clamp(40px, 8vw, 75px);
-    line-height: 1;
-    margin-bottom: 20px;
-}
-
-header h1 span {
-    color: #22d3ee;
-}
-
-header p {
-    color: #bae6fd;
-    max-width: 750px;
-    font-size: 18px;
-}
-
-/* MENU */
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 12px;
-    background: #020f1b;
-    border-bottom: 1px solid #164e63;
-}
-
-nav button {
-    background: transparent;
-    color: #94a3b8;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    padding: 10px 16px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-nav button:hover,
-nav button.active {
-    background: #083344;
-    color: #67e8f9;
-    border-color: #155e75;
-}
-
-/* CONTEÚDO */
-main {
-    width: min(1100px, 92%);
-    margin: 45px auto;
-}
-
-.pagina {
-    display: none;
-}
-
-.pagina.active {
-    display: block;
-    animation: aparecer 0.35s ease;
-}
-
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Site Interativo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2e;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .container {
+      text-align: center;
+      background: #2b2b3d;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      max-width: 500px;
+      width: 90%;
     }
-}
 
-.numero {
-    color: #22d3ee;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
 
-h2 {
-    color: white;
-    font-size: clamp(30px, 5vw, 48px);
-    margin: 5px 0 15px;
-}
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.1s, background 0.2s;
+    }
 
-h3 {
-    color: #67e8f9;
-    margin: 28px 0 12px;
-}
+    button:hover {
+      transform: scale(1.05);
+    }
 
-p {
-    color: #cbd5e1;
-    margin-bottom: 16px;
-}
+    .btn-agua { background-color: #3584e4; color: white; }
+    .btn-quimica { background-color: #e5a50a; color: white; }
 
-/* CARDS */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 18px;
-    margin: 25px 0;
-}
+    #info-box {
+      background: #181825;
+      padding: 20px;
+      border-radius: 8px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
 
-.card {
-    background: linear-gradient(145deg, #0b2235, #071a2a);
-    border: 1px solid #164e63;
-    border-radius: 15px;
-    padding: 24px;
-    transition: 0.25s;
-}
+  <div class="container">
+    <h1>Explorar Tópicos</h1>
+    
+    <div class="btn-group">
+      <button class="btn-agua" onclick="mostrarTexto('agua')">Água</button>
+      <button class="btn-quimica" onclick="mostrarTexto('quimica')">Química</button>
+    </div>
 
-.card:hover {
-    transform: translateY(-4px);
-    border-color: #22d3ee;
-}
+    <div id="info-box">
+      <p id="texto">Clique em um dos botões acima para ver as informações.</p>
+    </div>
+  </div>
 
-.card .icone {
-    font-size: 30px;
-    margin-bottom: 10px;
-}
+  <script>
+    function mostrarTexto(topico) {
+      const campoTexto = document.getElementById('texto');
+      
+      if (topico === 'agua') {
+        campoTexto.innerHTML = "<strong>Água (H₂O):</strong> Essencial para a vida. Cobre cerca de 71% da superfície da Terra e é composta por dois átomos de hidrogênio e um de oxigênio.";
+      } else if (topico === 'quimica') {
+        campoTexto.innerHTML = "<strong>Química:</strong> É a ciência que estuda a matéria, suas propriedades, como e por que as substâncias se combinam ou se separam para formar outras.";
+      }
+    }
+  </script>
 
-.card h3 {
-    margin-top: 0;
-}
-
-/* DESTAQUES */
-.destaque {
-    background: linear-gradient(135deg, #083344, #082f49);
-    border: 1px solid #0e7490;
-    border-left: 5px solid #22d3ee;
-    border-radius: 12px;
-    padding: 22px;
-    margin: 25px 0;
-}
-
-.destaque strong {
-    color: #67e8f9;
-}
-
-/* FLUXO */
-.fluxo {
-    display: flex;
-    align-items: stretch;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 10px 0 20px;
-}
-
-.fluxo-item {
-    min-width: 150px;
-    padding: 18px;
-    text-align: center;
-    background: #082f49;
-    border: 1px solid #155e75;
-    border-radius: 12px;
-}
-
-.seta {
-    display: flex;
-    align-items: center;
-    color: #22d3ee;
-    font-size: 25px;
-}
-
-/* QUÍMICA */
-.reacao {
-    background: #020617;
-    border: 1px solid #164e63;
-    border-radius: 12px;
-    padding: 22px;
-    margin: 20px 0;
-    text-align: center;
-}
-
-.equacao {
-    color: #67e8f9;
-    font-family: monospace;
-    font-size: 21px;
-    margin: 10px 0;
-}
-
-.reacao small {
-    color: #94a3b8;
-}
-
-.formula {
-    background: #020617;
-    border: 1px solid #164e63;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    color: #67e8f9;
-    font-family: monospace;
-    font-size: 19px;
-    margin: 20px 0;
-}
-
-/* TABELA */
-.tabela-container {
-    overflow-x: auto;
-    margin: 20px 0;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px;
-}
-
-th {
-    background: #075985;
-    color: white;
-    padding: 14px;
-    text-align: left;
-}
-
-td {
-    padding: 13px;
-    border-bottom: 1px solid #164e63;
-    color: #cbd5e1;
-}
-
-tr:nth-child(even) {
-    background: #071f31;
-}
-
-/* GRÁFICO */
-.grafico {
-    background: #020b14;
-    border: 1px solid #164e63;
-    border-radius: 18px;
-    padding: 28px;
-    margin: 25px 0;
-}
-
-.grafico h3 {
-    text-align: center;
-    margin-top: 0;
-}
-
-.eixo {
-    display: flex;
-    justify-content: space-between;
-    color: #64748b;
-    font-size: 12px;
-    margin-bottom: 20px;
-}
-
-.cidade {
-    margin-bottom: 30px;
-}
-
-.cidade-nome {
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.linha-grafico {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 8px 0;
-}
-
-.rotulo {
-    width: 125px;
-    color: #94a3b8;
-    font-size: 13px;
-}
-
-.fundo-barra {
-    flex: 1;
-    height: 27px;
-    background
+</body>
+</html>
