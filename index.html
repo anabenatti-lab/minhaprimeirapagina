@@ -3,89 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Site Interativo</title>
+  <title>Portal de Estudos</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1e1e2e;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    .container {
-      text-align: center;
-      background: #2b2b3d;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      max-width: 500px;
-      width: 90%;
-    }
-
-    .btn-group {
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f8fafc;
+      min-height: 100vh;
       display: flex;
-      gap: 10px;
       justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: transform 0.1s, background 0.2s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    .btn-agua { background-color: #3584e4; color: white; }
-    .btn-quimica { background-color: #e5a50a; color: white; }
-
-    #info-box {
-      background: #181825;
-      padding: 20px;
-      border-radius: 8px;
-      min-height: 80px;
-      display: flex;
       align-items: center;
-      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      color: #38bdf8;
+    }
+
+    p.sub {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .grid-botoes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #ffffff;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    .btn-agua { background-color: #0284c7; }
+    .btn-quimica { background-color: #d97706; }
+    .btn-biologia { background-color: #16a34a; }
+    .btn-matematica { background-color: #9333ea; }
+
+    .painel-conteudo {
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      min-height: 120px;
+    }
+
+    .painel-conteudo h2 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #f1f5f9;
+    }
+
+    .painel-conteudo p {
+      color: #cbd5e1;
+      line-height: 1.6;
+      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Explorar Tópicos</h1>
-    
-    <div class="btn-group">
-      <button class="btn-agua" onclick="mostrarTexto('agua')">Água</button>
-      <button class="btn-quimica" onclick="mostrarTexto('quimica')">Química</button>
+  <div class="card">
+    <h1>Painel de Conhecimento</h1>
+    <p class="sub">Clique em um dos temas abaixo para explorar o conteúdo</p>
+
+    <div class="grid-botoes">
+      <button class="btn btn-agua" onclick="carregarTema('agua')">Tratamento de Água</button>
+      <button class="btn btn-quimica" onclick="carregarTema('quimica')">Química</button>
+      <button class="btn btn-biologia" onclick="carregarTema('biologia')">Biologia</button>
+      <button class="btn btn-matematica" onclick="carregarTema('matematica')">Matemática</button>
     </div>
 
-    <div id="info-box">
-      <p id="texto">Clique em um dos botões acima para ver as informações.</p>
+    <div class="painel-conteudo">
+      <h2 id="titulo">Selecione um tópico</h2>
+      <p id="descricao">Escolha uma matéria acima para visualizar as informações.</p>
     </div>
   </div>
 
   <script>
-    function mostrarTexto(topico) {
-      const campoTexto = document.getElementById('texto');
-      
-      if (topico === 'agua') {
-        campoTexto.innerHTML = "<strong>Água (H₂O):</strong> Essencial para a vida. Cobre cerca de 71% da superfície da Terra e é composta por dois átomos de hidrogênio e um de oxigênio.";
-      } else if (topico === 'quimica') {
-        campoTexto.innerHTML = "<strong>Química:</strong> É a ciência que estuda a matéria, suas propriedades, como e por que as substâncias se combinam ou se separam para formar outras.";
+    const dados = {
+      agua: {
+        titulo: "Tratamento de Água e Esgoto",
+        descricao: "Processo essencial de saneamento. O tratamento de água limpa a água dos rios para consumo humano (coagulação, decantação, filtração e cloração). Já o tratamento de esgoto remove os poluentes dos resíduos domésticos antes de devolvê-los ao meio ambiente."
+      },
+      quimica: {
+        titulo: "Química",
+        descricao: "Ciência que estuda a matéria, sua composição, propriedades e as transformações que ocorrem nelas durante as reações químicas, desde a estrutura atômica até compostos complexos."
+      },
+      biologia: {
+        titulo: "Biologia",
+        descricao: "Estudo da vida e dos organismos vivos. Abrange desde a estrutura celular, genética e evolução, até a interação entre diferentes seres vivos e seus ecossistemas."
+      },
+      matematica: {
+        titulo: "Matemática",
+        descricao: "Ciência dos padrões, formas, quantidades e estruturas lógicas. Base fundamental para a tecnologia, economia e engenharia através do uso de números e fórmulas."
       }
+    };
+
+    function carregarTema(chave) {
+      document.getElementById('titulo').innerText = dados[chave].titulo;
+      document.getElementById('descricao').innerText = dados[chave].descricao;
     }
   </script>
 
