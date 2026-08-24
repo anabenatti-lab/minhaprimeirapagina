@@ -3,199 +3,557 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saneamento e Ciências</title>
+  <title>Portal Saneamento e Ciências</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --bg-dark: #0b1120;
+      --card-bg: #1e293b;
+      --card-inner: #0f172a;
+      --primary-blue: #0284c7;
+      --primary-cyan: #06b6d4;
+      --primary-teal: #0d9488;
+      --accent-green: #10b981;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     body {
-      background-color: #0f172a;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
       min-height: 100vh;
-      padding: 20px;
-    }
-
-    .container {
-      background-color: #1e293b;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 700px;
-      width: 100%;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-
-    h1 {
-      color: #38bdf8;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .btn-group {
       display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+      flex-direction: column;
     }
 
-    button {
-      padding: 12px 18px;
-      font-size: 14px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
+    /* Header e Banner Principal */
+    header {
+      background: linear-gradient(135deg, #0284c7 0%, #0d9488 100%);
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Container Full Screen / Ampliado */
+    main {
+      flex: 1;
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    /* Seção de Botões Principais */
+    .modulo-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .btn-modulo {
+      background: #1e293b;
+      border: 2px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: left;
       cursor: pointer;
-      color: white;
-      transition: transform 0.1s, opacity 0.2s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    button:hover {
-      opacity: 0.9;
-      transform: scale(1.02);
+    .btn-modulo:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.3);
+      border-color: var(--primary-cyan);
     }
 
-    .btn-principal { background-color: #0284c7; }
-    .btn-materia { background-color: #334155; }
-    .btn-materia.ativo { background-color: #16a34a; }
+    .btn-modulo.active {
+      border-color: var(--primary-cyan);
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+    }
 
-    #sub-menu {
-      display: none;
-      background-color: #0f172a;
+    .btn-modulo i {
+      font-size: 2.5rem;
+      color: var(--primary-cyan);
       padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #334155;
+      background: rgba(6, 182, 212, 0.1);
+      border-radius: 12px;
     }
 
-    #conteudo {
-      background-color: #0f172a;
+    .btn-modulo-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+
+    .btn-modulo-info p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Área do Painel Interativo */
+    .painel-container {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .visao-geral {
+      background: var(--card-inner);
+      border-left: 4px solid var(--primary-cyan);
       padding: 20px;
       border-radius: 8px;
-      border: 1px solid #334155;
-      min-height: 150px;
+      margin-bottom: 30px;
     }
 
-    #conteudo h2 {
-      color: #7dd3fc;
+    .visao-geral h2 {
+      font-size: 1.6rem;
+      color: var(--primary-cyan);
       margin-bottom: 10px;
     }
 
-    #conteudo p {
-      line-height: 1.6;
+    .visao-geral p {
+      line-height: 1.7;
       color: #cbd5e1;
+      font-size: 1.05rem;
     }
 
-    .chart-box {
-      margin-top: 15px;
-      position: relative;
+    /* Navegação das Disciplinas */
+    .disciplinas-nav {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-disc {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-disc:hover {
+      background: var(--card-inner);
+      color: #ffffff;
+    }
+
+    .btn-disc.active {
+      background: var(--primary-blue);
+      color: #ffffff;
+      border-color: var(--primary-blue);
+    }
+
+    /* Conteúdo Detalhado */
+    .detalhe-secao h3 {
+      font-size: 1.5rem;
+      color: #7dd3fc;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .detalhe-secao p {
+      line-height: 1.8;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    /* Tabelas Estilizadas */
+    .tabela-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
       width: 100%;
-      height: 280px;
+      border-collapse: collapse;
+      text-align: left;
+      background: var(--card-inner);
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background: #1e293b;
+      color: var(--primary-cyan);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* Gráfico */
+    .grafico-wrapper {
+      background: var(--card-inner);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-top: 20px;
+      height: 380px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      .disciplinas-nav { flex-direction: column; }
+      .btn-disc { width: 100%; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Saneamento Básico Interativo</h1>
+  <header>
+    <h1>TRATAMENTO DE ÁGUA E ESGOTO</h1>
+    <p>Portal Educacional de Ciências, Biologia, Química e Matemática Aplicada ao Saneamento</p>
+  </header>
 
-    <div class="btn-group">
-      <button class="btn-principal" onclick="selecionarModulo('agua')">Tratamento de Água (ETA)</button>
-      <button class="btn-principal" style="background-color: #0d9488;" onclick="selecionarModulo('esgoto')">Tratamento de Esgoto (ETE)</button>
-    </div>
+  <main>
+    <!-- Módulos Principais -->
+    <div class="modulo-section">
+      <div class="btn-modulo active" id="mod-agua" onclick="mudarModulo('agua')">
+        <i class="fa-solid fa-droplet"></i>
+        <div class="btn-modulo-info">
+          <h3>Tratamento de Água (ETA)</h3>
+          <p>Purificação de água de rios/represas para consumo humano seguro.</p>
+        </div>
+      </div>
 
-    <div id="sub-menu">
-      <p style="text-align: center; margin-bottom: 10px; color: #94a3b8;">Escolha a disciplina:</p>
-      <div class="btn-group">
-        <button class="btn-materia" onclick="carregarConteudo('biologia')">Biologia</button>
-        <button class="btn-materia" onclick="carregarConteudo('quimica')">Química</button>
-        <button class="btn-materia" onclick="carregarConteudo('matematica')">Matemática</button>
+      <div class="btn-modulo" id="mod-esgoto" onclick="mudarModulo('esgoto')">
+        <i class="fa-solid fa-water"></i>
+        <div class="btn-modulo-info">
+          <h3>Tratamento de Esgoto (ETE)</h3>
+          <p>Despoluição de efluentes sanitários antes do retorno ao meio ambiente.</p>
+        </div>
       </div>
     </div>
 
-    <div id="conteudo">
-      <h2 id="titulo">Selecione uma opção</h2>
-      <p id="texto">Clique em Água ou Esgoto acima para começar.</p>
-      <div id="grafico-container" class="chart-box" style="display: none;">
-        <canvas id="meuGrafico"></canvas>
+    <!-- Painel de Exibição -->
+    <div class="painel-container">
+      
+      <!-- Visão Geral Automatizada -->
+      <div class="visao-geral">
+        <h2 id="geral-titulo">Estação de Tratamento de Água (ETA)</h2>
+        <p id="geral-descricao">A Estação de Tratamento de Água é responsável por transformar água bruta (retirada de rios, represas ou poços) em água potável, livre de contaminantes físicos, químicos e biológicos, seguindo os padrões rigorosos do Ministério da Saúde para o consumo humano seguro.</p>
       </div>
+
+      <!-- Navegação por Disciplina -->
+      <div class="disciplinas-nav">
+        <button class="btn-disc active" id="btn-biologia" onclick="mudarDisciplina('biologia')">
+          <i class="fa-solid fa-dna"></i> Biologia
+        </button>
+        <button class="btn-disc" id="btn-quimica" onclick="mudarDisciplina('quimica')">
+          <i class="fa-solid fa-flask"></i> Química
+        </button>
+        <button class="btn-disc" id="btn-matematica" onclick="mudarDisciplina('matematica')">
+          <i class="fa-solid fa-chart-column"></i> Matemática
+        </button>
+      </div>
+
+      <!-- Conteúdo Específico -->
+      <div id="conteudo-detalhado">
+        <!-- Injetado por JS -->
+      </div>
+
     </div>
-  </div>
+  </main>
+
+  <footer>
+    <p>Portal Interativo de Saneamento Básico &copy; 2026 - Dados oficiais baseados no SNIS (Sistema Nacional de Informações sobre Saneamento)</p>
+  </footer>
 
   <script>
-    let moduloAtual = '';
-    let meuGrafico = null;
+    let moduloAtual = 'agua';
+    let disciplinaAtual = 'biologia';
+    let chartInstance = null;
 
-    function selecionarModulo(modulo) {
-      moduloAtual = modulo;
-      document.getElementById('sub-menu').style.display = 'block';
-      document.getElementById('grafico-container').style.display = 'none';
+    const baseDados = {
+      agua: {
+        titulo: "Estação de Tratamento de Água (ETA)",
+        descricao: "A Estação de Tratamento de Água é um complexo industrial focado em purificar a água captada na natureza para deixá-la própria para ingestão, preparação de alimentos e higiene pessoal. O processo remove partículas visíveis, metais, bactérias, vírus e parasitas através de rigorosas barreiras físicas e químicas.",
+        biologia: {
+          titulo: "<i class='fa-solid fa-virus-slash'></i> Microbiologia e Controle de Patógenos na ETA",
+          texto: "A Biologia no tratamento de água foca na identificação e eliminação de organismos patogênicos que transmitem doenças de veiculação hídrica (como cólera, febre tifoide, giardíase e hepatite A). Os biólogos monitoram constantemente a presença de microalgas tóxicas (como cianobactérias) nos reservatórios que podem soltar hepatotoxinas e causar sabor e odor ruins na água.",
+          tabela: `
+            <div class='tabela-wrapper'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Agente Biológico</th>
+                    <th>Doença Associada</th>
+                    <th>Mecanismo Biológico de Remoção</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Escherichia coli (Bactéria)</strong></td>
+                    <td>Gastroenterite Severa</td>
+                    <td>Oxidação da parede celular via Cloração / Ozônio</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Giardia lamblia (Protozoário)</strong></td>
+                    <td>Giardíase</td>
+                    <td>Filtração Física em leito de Areia/Antracito</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cianobactérias (Algas)</strong></td>
+                    <td>Hepatotoxicidade / Neurotoxicidade</td>
+                    <td>Coagulação + Aplicação de Carvão Ativado</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>`
+        },
+        quimica: {
+          titulo: "<i class='fa-solid fa-flask-vial'></i> Reações e Processos Químicos na ETA",
+          texto: "O tratamento químico envolve a desestabilização de cargas elétricas de partículas de sujeira (colóides) suspensas na água. O uso de coagulantes altera o pH e causa reações de hidrólise para aglomerar a sujeira em flocos densos. Por fim, a cloração assegura a desinfecção por oxidação orgânica e a fluoretação previne a cárie dentária na população.",
+          tabela: `
+            <div class='tabela-wrapper'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Etapa Química</th>
+                    <th>Reagente Utilizado</th>
+                    <th>Função Principal da Reação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Coagulação</strong></td>
+                    <td>Sulfato de Alumínio Al₂(SO₄)₃ / Cloreto Férrico</td>
+                    <td>Neutraliza cargas negativas e coagula a sujeira</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ajuste de pH</strong></td>
+                    <td>Cal Hidratada Ca(OH)₂</td>
+                    <td>Corrige a acidez e otimiza a atuação do coagulante</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Desinfecção</strong></td>
+                    <td>Gás Cloro (Cl₂) / Hipoclorito de Sódio</td>
+                    <td>Oxida a matéria orgânica e destrói bactérias</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Fluoretação</strong></td>
+                    <td>Ácido Fluossilícico (H₂SiF₆)</td>
+                    <td>Prevenção epidemiológica da cárie dentária</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>`
+        },
+        matematica: {
+          titulo: "<i class='fa-solid fa-calculator'></i> Indicadores Matemáticos e Cobertura de Água",
+          texto: "A Matemática e a Estatística fornecem a base de cálculo para a dosagem exata dos reagentes químicos (em mg/L), determinação da vazão de captação (m³/s) e eficiência do serviço prestado. Abaixo temos os dados oficiais atualizados de cobertura da rede de distribuição de água tratada nas maiores cidades do Paraná:",
+          grafico: true,
+          graficoRotulo: "População Atendida por Água Tratada (%)",
+          graficoDados: [100, 100, 100]
+        }
+      },
+      esgoto: {
+        titulo: "Estação de Tratamento de Esgoto (ETE)",
+        descricao: "A Estação de Tratamento de Esgoto limpa as águas residuais vindas de pias, chuveiros, privadas e indústrias antes que retornem aos rios e mares. Sem esse tratamento, os efluentes destroem a vida aquática, esgotam o oxigênio da água e propagam epidemias graves nas zonas urbanas.",
+        biologia: {
+          titulo: "<i class='fa-solid fa-bacterium'></i> Processos Biológicos de Digestão Orgânica",
+          texto: "A Biologia é o motor de uma ETE. O tratamento utiliza colônias de bactérias e protozoários em tanques de lodos ativados para digerir a matéria orgânica (fezes, restos de alimentos). Em ambientes aeróbicos (com injeção de ar), as bactérias 'comem' os poluentes e transformam o esgoto bruto em água limpa e gás carbônico.",
+          tabela: `
+            <div class='tabela-wrapper'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Grupo Biológico</th>
+                    <th>Tipo de Respiração</th>
+                    <th>Atuação no Tratamento de Esgoto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Bactérias Heterotróficas</strong></td>
+                    <td>Aeróbica (com O₂)</td>
+                    <td>Consomem a matéria orgânica carbonácea dissolvida</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Bactérias Nitrificantes</strong></td>
+                    <td>Aeróbica (com O₂)</td>
+                    <td>Convertem a amônia tóxica em nitrato</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Arqueas Metanogênicas</strong></td>
+                    <td>Anaeróbica (sem O₂)</td>
+                    <td>Digerem o lodo em reatores (UASB) e geram Biogás (CH₄)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>`
+        },
+        quimica: {
+          titulo: "<i class='fa-solid fa-vial'></i> Análises Químicas e Parâmetros de Carga Poluidora",
+          texto: "A Química mede a eficiência do tratamento monitorando a Demanda Bioquímica de Oxigênio (DBO) e a Demanda Química de Oxigênio (DQO). Esses parâmetros indicam a quantidade de oxigênio necessária para degradar os poluentes. Quanto menor a DBO na saída do efluente, mais limpa está a água que retorna ao meio ambiente.",
+          tabela: `
+            <div class='tabela-wrapper'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Parâmetro Químico</th>
+                    <th>Sigla</th>
+                    <th>Importância Ecológica / Sanitária</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Demanda Bioquímica de Oxigênio</strong></td>
+                    <td>DBO</td>
+                    <td>Mede a matéria orgânica biodegradável. Eficiência mínima exigida: >80%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Oxigênio Dissolvido</strong></td>
+                    <td>OD</td>
+                    <td>Quantidade de oxigênio livre no rio. Vital para a sobrevivência de peixes</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Nutrientes (Fósforo e Nitrogênio)</strong></td>
+                    <td>P e N</td>
+                    <td>Em excesso causam eutanásia dos rios (Eutrofização/proliferação de algas)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>`
+        },
+        matematica: {
+          titulo: "<i class='fa-solid fa-chart-line'></i> Indicadores de Coleta e Tratamento de Esgoto",
+          texto: "A Matemática dimensiona o tempo de retenção hidráulica no interior dos tanques, o volume dos decantadores e calcula o percentual de efluente tratado. O gráfico abaixo apresenta a porcentagem real da população atendida com coleta e tratamento de esgoto sanitário segundo dados do SNIS/Trata Brasil:",
+          grafico: true,
+          graficoRotulo: "Atendimento com Coleta e Tratamento de Esgoto (%)",
+          graficoDados: [99.9, 99.9, 99.8]
+        }
+      }
+    };
+
+    function mudarModulo(mod) {
+      moduloAtual = mod;
+      document.getElementById('mod-agua').classList.toggle('active', mod === 'agua');
+      document.getElementById('mod-esgoto').classList.toggle('active', mod === 'esgoto');
       
-      const nomeModulo = modulo === 'agua' ? 'Tratamento de Água (ETA)' : 'Tratamento de Esgoto (ETE)';
-      document.getElementById('titulo').innerText = nomeModulo;
-      document.getElementById('texto').innerText = 'Agora selecione uma das matérias acima (Biologia, Química ou Matemática).';
+      const dados = baseDados[mod];
+      document.getElementById('geral-titulo').innerText = dados.titulo;
+      document.getElementById('geral-descricao').innerText = dados.descricao;
+
+      renderizarConteudo();
     }
 
-    function carregarConteudo(materia) {
-      const titulo = document.getElementById('titulo');
-      const texto = document.getElementById('texto');
-      const graficoContainer = document.getElementById('grafico-container');
+    function mudarDisciplina(disc) {
+      disciplinaAtual = disc;
+      document.querySelectorAll('.btn-disc').forEach(b => b.classList.remove('active'));
+      document.getElementById(`btn-${disc}`).classList.add('active');
 
-      graficoContainer.style.display = 'none';
+      renderizarConteudo();
+    }
 
-      if (moduloAtual === 'agua') {
-        if (materia === 'biologia') {
-          titulo.innerText = "Biologia no Tratamento de Água";
-          texto.innerText = "A Biologia é fundamental para a eliminação de microrganismos patogênicos (como bactérias, vírus e protozoários) que causam doenças veiculadas pela água, a exemplo da cólera e da giardíase. O processo garante que a água chegue potável e segura para a saúde pública humana e ecossistemas.";
-        } else if (materia === 'quimica') {
-          titulo.innerText = "Química no Tratamento de Água";
-          texto.innerText = "A Química atua diretamente no ajuste do pH e na adição de reagentes. Agentes coagulantes como o Sulfato de Alumínio fazem as sujeiras se juntarem para afundar (floculação/decantação). Depois, adiciona-se Cloro para desinfecção e Flúor para prevenção de cáries.";
-        } else if (materia === 'matematica') {
-          titulo.innerText = "Matemática no Tratamento de Água";
-          texto.innerText = "A Matemática é aplicada no cálculo de vazão (litros por segundo), dosagem exata de reagentes químicos em partes por milhão (PPM) e nos indicadores de cobertura populacional. Veja abaixo a porcentagem da população atendida com água tratada:";
-          gerarGrafico([100, 100, 100], "Atendimento de Água (%)");
-        }
-      } else if (moduloAtual === 'esgoto') {
-        if (materia === 'biologia') {
-          titulo.innerText = "Biologia no Tratamento de Esgoto";
-          texto.innerText = "A Biologia é o 'coração' do tratamento de esgoto. Bactérias e microrganismos aeróbicos/anaeróbicos são usados para devorar e decompor a matéria orgânica presente nos resíduos humanos. Isso impede a mortandade de peixes e a degradação dos rios.";
-        } else if (materia === 'quimica') {
-          titulo.innerText = "Química no Tratamento de Esgoto";
-          texto.innerText = "A Química entra no controle do Oxigênio Dissolvido (OD) e na medição da Demanda Química de Oxigênio (DQO). Também monitora e neutraliza substâncias tóxicas, metais pesados e nutrientes (como fósforo e nitrogênio) que provocam a poluição de lagos e rios.";
-        } else if (materia === 'matematica') {
-          titulo.innerText = "Matemática no Tratamento de Esgoto";
-          texto.innerText = "A Matemática é essencial para calcular a eficiência da remoção de poluentes (%) e a taxa de coleta e tratamento sobre o esgoto gerado. Veja abaixo os índices reais de coleta/atendimento de esgoto nas três maiores cidades do PR:";
-          gerarGrafico([99.9, 99.9, 99.8], "Coleta e Tratamento de Esgoto (%)");
-        }
+    function renderizarConteudo() {
+      const container = document.getElementById('conteudo-detalhado');
+      const info = baseDados[moduloAtual][disciplinaAtual];
+
+      let html = `<div class="detalhe-secao">
+        <h3>${info.titulo}</h3>
+        <p>${info.texto}</p>`;
+
+      if (info.tabela) {
+        html += info.tabela;
+      }
+
+      if (info.grafico) {
+        html += `
+          <div class="grafico-wrapper">
+            <canvas id="meuGrafico"></canvas>
+          </div>`;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+
+      if (info.grafico) {
+        renderizarGrafico(info.graficoRotulo, info.graficoDados);
       }
     }
 
-    function gerarGrafico(dados, rotulo) {
-      const graficoContainer = document.getElementById('grafico-container');
-      graficoContainer.style.display = 'block';
-
+    function renderizarGrafico(label, data) {
       const ctx = document.getElementById('meuGrafico').getContext('2d');
-
-      if (meuGrafico) {
-        meuGrafico.destroy();
+      if (chartInstance) {
+        chartInstance.destroy();
       }
 
-      meuGrafico = new Chart(ctx, {
+      chartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: ['Maringá', 'Londrina', 'Curitiba'],
           datasets: [{
-            label: rotulo,
-            data: dados,
-            backgroundColor: ['#38bdf8', '#34d399', '#a78bfa'],
-            borderWidth: 1
+            label: label,
+            data: data,
+            backgroundColor: ['#06b6d4', '#10b981', '#8b5cf6'],
+            borderRadius: 8,
+            borderWidth: 0
           }]
         },
         options: {
@@ -205,19 +563,25 @@
             y: {
               beginAtZero: true,
               max: 100,
-              ticks: { color: '#ffffff' }
+              grid: { color: '#334155' },
+              ticks: { color: '#94a3b8', font: { size: 12 } }
             },
             x: {
-              ticks: { color: '#ffffff' }
+              grid: { display: false },
+              ticks: { color: '#f8fafc', font: { size: 14, weight: 'bold' } }
             }
           },
           plugins: {
-            legend: { labels: { color: '#ffffff' } }
+            legend: {
+              labels: { color: '#f8fafc', font: { size: 13 } }
+            }
           }
         }
       });
     }
-  </script>
 
+    // Inicialização
+    renderizarConteudo();
+  </script>
 </body>
-</html>
+</html
