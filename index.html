@@ -3,140 +3,219 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal de Estudos</title>
+  <title>Saneamento e Ciências</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #f8fafc;
-      min-height: 100vh;
+      background-color: #0f172a;
+      color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
       padding: 20px;
     }
 
-    .card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 16px;
+    .container {
+      background-color: #1e293b;
       padding: 30px;
-      max-width: 600px;
+      border-radius: 12px;
+      max-width: 700px;
       width: 100%;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
 
     h1 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 8px;
       color: #38bdf8;
-    }
-
-    p.sub {
       text-align: center;
-      color: #94a3b8;
-      font-size: 0.95rem;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
-    .grid-botoes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
-    .btn {
-      padding: 12px 16px;
+    button {
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: bold;
       border: none;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.9rem;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      color: #ffffff;
+      color: white;
+      transition: transform 0.1s, opacity 0.2s;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.1);
+    button:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
     }
 
-    .btn-agua { background-color: #0284c7; }
-    .btn-quimica { background-color: #d97706; }
-    .btn-biologia { background-color: #16a34a; }
-    .btn-matematica { background-color: #9333ea; }
+    .btn-principal { background-color: #0284c7; }
+    .btn-materia { background-color: #334155; }
+    .btn-materia.ativo { background-color: #16a34a; }
 
-    .painel-conteudo {
+    #sub-menu {
+      display: none;
       background-color: #0f172a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
       border: 1px solid #334155;
-      border-radius: 12px;
+    }
+
+    #conteudo {
+      background-color: #0f172a;
       padding: 20px;
-      min-height: 120px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      min-height: 150px;
     }
 
-    .painel-conteudo h2 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      color: #f1f5f9;
+    #conteudo h2 {
+      color: #7dd3fc;
+      margin-bottom: 10px;
     }
 
-    .painel-conteudo p {
-      color: #cbd5e1;
+    #conteudo p {
       line-height: 1.6;
-      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    .chart-box {
+      margin-top: 15px;
+      position: relative;
+      width: 100%;
+      height: 280px;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Painel de Conhecimento</h1>
-    <p class="sub">Clique em um dos temas abaixo para explorar o conteúdo</p>
+  <div class="container">
+    <h1>Saneamento Básico Interativo</h1>
 
-    <div class="grid-botoes">
-      <button class="btn btn-agua" onclick="carregarTema('agua')">Tratamento de Água</button>
-      <button class="btn btn-quimica" onclick="carregarTema('quimica')">Química</button>
-      <button class="btn btn-biologia" onclick="carregarTema('biologia')">Biologia</button>
-      <button class="btn btn-matematica" onclick="carregarTema('matematica')">Matemática</button>
+    <div class="btn-group">
+      <button class="btn-principal" onclick="selecionarModulo('agua')">Tratamento de Água (ETA)</button>
+      <button class="btn-principal" style="background-color: #0d9488;" onclick="selecionarModulo('esgoto')">Tratamento de Esgoto (ETE)</button>
     </div>
 
-    <div class="painel-conteudo">
-      <h2 id="titulo">Selecione um tópico</h2>
-      <p id="descricao">Escolha uma matéria acima para visualizar as informações.</p>
+    <div id="sub-menu">
+      <p style="text-align: center; margin-bottom: 10px; color: #94a3b8;">Escolha a disciplina:</p>
+      <div class="btn-group">
+        <button class="btn-materia" onclick="carregarConteudo('biologia')">Biologia</button>
+        <button class="btn-materia" onclick="carregarConteudo('quimica')">Química</button>
+        <button class="btn-materia" onclick="carregarConteudo('matematica')">Matemática</button>
+      </div>
+    </div>
+
+    <div id="conteudo">
+      <h2 id="titulo">Selecione uma opção</h2>
+      <p id="texto">Clique em Água ou Esgoto acima para começar.</p>
+      <div id="grafico-container" class="chart-box" style="display: none;">
+        <canvas id="meuGrafico"></canvas>
+      </div>
     </div>
   </div>
 
   <script>
-    const dados = {
-      agua: {
-        titulo: "Tratamento de Água e Esgoto",
-        descricao: "Processo essencial de saneamento. O tratamento de água limpa a água dos rios para consumo humano (coagulação, decantação, filtração e cloração). Já o tratamento de esgoto remove os poluentes dos resíduos domésticos antes de devolvê-los ao meio ambiente."
-      },
-      quimica: {
-        titulo: "Química",
-        descricao: "Ciência que estuda a matéria, sua composição, propriedades e as transformações que ocorrem nelas durante as reações químicas, desde a estrutura atômica até compostos complexos."
-      },
-      biologia: {
-        titulo: "Biologia",
-        descricao: "Estudo da vida e dos organismos vivos. Abrange desde a estrutura celular, genética e evolução, até a interação entre diferentes seres vivos e seus ecossistemas."
-      },
-      matematica: {
-        titulo: "Matemática",
-        descricao: "Ciência dos padrões, formas, quantidades e estruturas lógicas. Base fundamental para a tecnologia, economia e engenharia através do uso de números e fórmulas."
-      }
-    };
+    let moduloAtual = '';
+    let meuGrafico = null;
 
-    function carregarTema(chave) {
-      document.getElementById('titulo').innerText = dados[chave].titulo;
-      document.getElementById('descricao').innerText = dados[chave].descricao;
+    function selecionarModulo(modulo) {
+      moduloAtual = modulo;
+      document.getElementById('sub-menu').style.display = 'block';
+      document.getElementById('grafico-container').style.display = 'none';
+      
+      const nomeModulo = modulo === 'agua' ? 'Tratamento de Água (ETA)' : 'Tratamento de Esgoto (ETE)';
+      document.getElementById('titulo').innerText = nomeModulo;
+      document.getElementById('texto').innerText = 'Agora selecione uma das matérias acima (Biologia, Química ou Matemática).';
+    }
+
+    function carregarConteudo(materia) {
+      const titulo = document.getElementById('titulo');
+      const texto = document.getElementById('texto');
+      const graficoContainer = document.getElementById('grafico-container');
+
+      graficoContainer.style.display = 'none';
+
+      if (moduloAtual === 'agua') {
+        if (materia === 'biologia') {
+          titulo.innerText = "Biologia no Tratamento de Água";
+          texto.innerText = "A Biologia é fundamental para a eliminação de microrganismos patogênicos (como bactérias, vírus e protozoários) que causam doenças veiculadas pela água, a exemplo da cólera e da giardíase. O processo garante que a água chegue potável e segura para a saúde pública humana e ecossistemas.";
+        } else if (materia === 'quimica') {
+          titulo.innerText = "Química no Tratamento de Água";
+          texto.innerText = "A Química atua diretamente no ajuste do pH e na adição de reagentes. Agentes coagulantes como o Sulfato de Alumínio fazem as sujeiras se juntarem para afundar (floculação/decantação). Depois, adiciona-se Cloro para desinfecção e Flúor para prevenção de cáries.";
+        } else if (materia === 'matematica') {
+          titulo.innerText = "Matemática no Tratamento de Água";
+          texto.innerText = "A Matemática é aplicada no cálculo de vazão (litros por segundo), dosagem exata de reagentes químicos em partes por milhão (PPM) e nos indicadores de cobertura populacional. Veja abaixo a porcentagem da população atendida com água tratada:";
+          gerarGrafico([100, 100, 100], "Atendimento de Água (%)");
+        }
+      } else if (moduloAtual === 'esgoto') {
+        if (materia === 'biologia') {
+          titulo.innerText = "Biologia no Tratamento de Esgoto";
+          texto.innerText = "A Biologia é o 'coração' do tratamento de esgoto. Bactérias e microrganismos aeróbicos/anaeróbicos são usados para devorar e decompor a matéria orgânica presente nos resíduos humanos. Isso impede a mortandade de peixes e a degradação dos rios.";
+        } else if (materia === 'quimica') {
+          titulo.innerText = "Química no Tratamento de Esgoto";
+          texto.innerText = "A Química entra no controle do Oxigênio Dissolvido (OD) e na medição da Demanda Química de Oxigênio (DQO). Também monitora e neutraliza substâncias tóxicas, metais pesados e nutrientes (como fósforo e nitrogênio) que provocam a poluição de lagos e rios.";
+        } else if (materia === 'matematica') {
+          titulo.innerText = "Matemática no Tratamento de Esgoto";
+          texto.innerText = "A Matemática é essencial para calcular a eficiência da remoção de poluentes (%) e a taxa de coleta e tratamento sobre o esgoto gerado. Veja abaixo os índices reais de coleta/atendimento de esgoto nas três maiores cidades do PR:";
+          gerarGrafico([99.9, 99.9, 99.8], "Coleta e Tratamento de Esgoto (%)");
+        }
+      }
+    }
+
+    function gerarGrafico(dados, rotulo) {
+      const graficoContainer = document.getElementById('grafico-container');
+      graficoContainer.style.display = 'block';
+
+      const ctx = document.getElementById('meuGrafico').getContext('2d');
+
+      if (meuGrafico) {
+        meuGrafico.destroy();
+      }
+
+      meuGrafico = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Maringá', 'Londrina', 'Curitiba'],
+          datasets: [{
+            label: rotulo,
+            data: dados,
+            backgroundColor: ['#38bdf8', '#34d399', '#a78bfa'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: { color: '#ffffff' }
+            },
+            x: {
+              ticks: { color: '#ffffff' }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#ffffff' } }
+          }
+        }
+      });
     }
   </script>
 
