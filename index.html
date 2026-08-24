@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Tratamento da Água e do Esgoto</title>
 
+
     <style>
+
+        /* =========================
+           CONFIGURAÇÕES GERAIS
+           ========================= */
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background-color: #eef8ff;
             color: #17324d;
-            line-height: 1.6;
+            line-height: 1.7;
         }
+
+
+        /* =========================
+           CABEÇALHO
+           ========================= */
 
         header {
             background: linear-gradient(135deg, #075985, #0ea5e9);
             color: white;
             text-align: center;
-            padding: 55px 20px;
+            padding: 60px 20px;
         }
 
         header h1 {
@@ -31,8 +47,13 @@
         }
 
         header p {
-            font-size: 18px;
+            font-size: 19px;
         }
+
+
+        /* =========================
+           MENU
+           ========================= */
 
         nav {
             background-color: #064e70;
@@ -43,65 +64,121 @@
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 12px;
             font-weight: bold;
+            margin: 0 12px;
         }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           CONTEÚDO
+           ========================= */
 
         main {
             max-width: 1100px;
             margin: auto;
-            padding: 30px 20px;
+            padding: 35px 20px;
         }
 
         section {
             background-color: white;
-            margin-bottom: 25px;
             padding: 30px;
+            margin-bottom: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         h2 {
             color: #0369a1;
+            margin-bottom: 18px;
+            font-size: 29px;
         }
 
         h3 {
             color: #075985;
+            margin-top: 25px;
+            margin-bottom: 10px;
         }
 
-        .quimica {
-            border-left: 6px solid #0ea5e9;
+        p {
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           DESTAQUES
+           ========================= */
+
+        .destaque {
             background-color: #e0f2fe;
+            border-left: 6px solid #0284c7;
             padding: 20px;
             border-radius: 10px;
+            margin: 20px 0;
         }
+
+
+        /* =========================
+           QUÍMICA
+           ========================= */
+
+        .quimica {
+            background-color: #f0f9ff;
+            border: 2px solid #7dd3fc;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .quimica h3 {
+            color: #075985;
+        }
+
+
+        /* =========================
+           ETAPAS
+           ========================= */
 
         .etapas {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            margin-top: 25px;
         }
 
         .etapa {
             background-color: #f0f9ff;
             border: 1px solid #bae6fd;
-            padding: 18px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 12px;
         }
 
         .etapa strong {
             color: #0369a1;
+            font-size: 18px;
         }
+
+
+        /* =========================
+           FÓRMULAS
+           ========================= */
 
         .formula {
             background-color: #f1f5f9;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 17px;
-            margin: 15px 0;
+            border-radius: 10px;
+            padding: 18px;
+            margin: 18px 0;
+            font-family: "Courier New", monospace;
+            font-size: 18px;
+            text-align: center;
         }
+
+
+        /* =========================
+           TABELAS
+           ========================= */
 
         table {
             width: 100%;
@@ -109,9 +186,10 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #bae6fd;
-            padding: 12px;
+            padding: 13px;
             text-align: left;
         }
 
@@ -124,23 +202,112 @@
             background-color: #f0f9ff;
         }
 
-        .destaque {
-            background-color: #ecfeff;
-            border-left: 5px solid #0891b2;
-            padding: 18px;
-            margin-top: 20px;
+
+        /* =========================
+           GRÁFICO
+           ========================= */
+
+        .grafico {
+            background-color: #f8fcff;
+            border: 1px solid #bae6fd;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 900px;
         }
+
+        .cidade {
+            margin-bottom: 30px;
+        }
+
+        .cidade h4 {
+            color: #075985;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .barra-linha {
+            margin-bottom: 15px;
+        }
+
+        .legenda {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .barra {
+            width: 100%;
+            height: 30px;
+            background-color: #dbeafe;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .barra-agua {
+            height: 100%;
+            background-color: #0ea5e9;
+            border-radius: 15px;
+        }
+
+        .barra-esgoto {
+            height: 100%;
+            background-color: #075985;
+            border-radius: 15px;
+        }
+
+        .legenda-grafico {
+            margin-top: 20px;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .item-legenda {
+            font-weight: bold;
+        }
+
+        .quadrado-agua {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-color: #0ea5e9;
+            margin-right: 5px;
+        }
+
+        .quadrado-esgoto {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-color: #075985;
+            margin-right: 5px;
+        }
+
+
+        /* =========================
+           RODAPÉ
+           ========================= */
 
         footer {
             background-color: #064e70;
             color: white;
             text-align: center;
-            padding: 25px;
+            padding: 30px 20px;
         }
 
+
+        /* =========================
+           CELULAR
+           ========================= */
+
         @media (max-width: 600px) {
+
             header h1 {
                 font-size: 30px;
+            }
+
+            header p {
+                font-size: 16px;
             }
 
             nav a {
@@ -155,200 +322,709 @@
             table {
                 font-size: 14px;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     CABEÇALHO
+     ========================= -->
+
 <header>
+
     <h1>💧 Tratamento da Água e do Esgoto</h1>
-    <p>Química, Biologia e Matemática aplicadas ao saneamento</p>
+
+    <p>
+        Química, Biologia e Matemática aplicadas ao saneamento
+    </p>
+
 </header>
 
+
+<!-- =========================
+     MENU
+     ========================= -->
+
 <nav>
+
     <a href="#agua">Água</a>
+
     <a href="#quimica">Química</a>
+
     <a href="#esgoto">Esgoto</a>
+
     <a href="#biologia">Biologia</a>
+
     <a href="#matematica">Matemática</a>
+
 </nav>
+
 
 <main>
 
-    <!-- INTRODUÇÃO -->
-    <section>
-        <h2>Introdução</h2>
 
-        <p>
-            A água é essencial para a vida e para as atividades humanas.
-            Porém, a água retirada de rios, lagos e represas pode conter
-            partículas de sujeira, microrganismos e substâncias químicas.
-            Por isso, ela precisa passar por processos de tratamento antes
-            de ser distribuída para a população.
-        </p>
+<!-- =========================
+     INTRODUÇÃO
+     ========================= -->
 
-        <p>
-            O tratamento do esgoto também é fundamental para evitar a
-            contaminação dos rios e diminuir os riscos à saúde.
-        </p>
-    </section>
+<section>
 
-    <!-- TRATAMENTO DA ÁGUA -->
-    <section id="agua">
-        <h2>1. Tratamento da água</h2>
+    <h2>Introdução</h2>
 
-        <p>
-            O tratamento da água ocorre em uma Estação de Tratamento de Água
-            (ETA). As etapas mais importantes são:
-        </p>
+    <p>
+        A água é um recurso essencial para a vida, para a agricultura,
+        para a indústria e para diversas atividades do nosso cotidiano.
+        Porém, a água encontrada na natureza pode conter partículas,
+        microrganismos e diferentes substâncias químicas.
+    </p>
 
-        <div class="etapas">
+    <p>
+        Por isso, ela precisa passar por processos de tratamento antes
+        de ser distribuída para a população. O esgoto também precisa
+        ser tratado antes de retornar ao meio ambiente.
+    </p>
 
-            <div class="etapa">
-                <strong>1. Captação</strong>
-                <p>
-                    A água é retirada de rios, represas ou outras fontes.
-                </p>
-            </div>
+    <div class="destaque">
 
-            <div class="etapa">
-                <strong>2. Coagulação</strong>
-                <p>
-                    Produtos químicos ajudam a juntar as partículas de sujeira.
-                </p>
-            </div>
+        <strong>
+            A Química possui um papel muito importante no saneamento.
+        </strong>
 
-            <div class="etapa">
-                <strong>3. Floculação</strong>
-                <p>
-                    As partículas se unem e formam flocos maiores.
-                </p>
-            </div>
+        Ela permite compreender as substâncias utilizadas no tratamento,
+        as reações químicas, o pH, as concentrações e os processos de
+        desinfecção e remoção de impurezas.
 
-            <div class="etapa">
-                <strong>4. Decantação</strong>
-                <p>
-                    Os flocos ficam mais pesados e se depositam no fundo.
-                </p>
-            </div>
+    </div>
 
-            <div class="etapa">
-                <strong>5. Filtração</strong>
-                <p>
-                    A água passa por filtros que retêm partículas restantes.
-                </p>
-            </div>
+</section>
 
-            <div class="etapa">
-                <strong>6. Desinfecção</strong>
-                <p>
-                    O cloro é utilizado para eliminar muitos microrganismos.
-                </p>
-            </div>
 
-            <div class="etapa">
-                <strong>7. Fluoretação</strong>
-                <p>
-                    O fluoreto pode ser adicionado para auxiliar na prevenção
-                    de cáries.
-                </p>
-            </div>
+<!-- =========================
+     TRATAMENTO DA ÁGUA
+     ========================= -->
 
-        </div>
-    </section>
+<section id="agua">
 
-    <!-- QUÍMICA -->
-    <section id="quimica">
-        <h2>🧪 2. A Química no tratamento da água</h2>
+    <h2>1. Tratamento da água</h2>
 
-        <div class="quimica">
+    <p>
+        O tratamento da água acontece em uma Estação de Tratamento de
+        Água (ETA). O objetivo é remover partículas, impurezas e
+        microrganismos que podem prejudicar a qualidade da água.
+    </p>
+
+
+    <div class="etapas">
+
+
+        <div class="etapa">
+
+            <strong>1. Captação</strong>
 
             <p>
-                A Química é fundamental para o tratamento da água, pois
-                permite utilizar substâncias químicas para remover impurezas
-                e controlar microrganismos.
-            </p>
-
-            <h3>Coagulação</h3>
-
-            <p>
-                Um dos produtos utilizados na coagulação é o sulfato de
-                alumínio. Ele favorece a agregação das partículas presentes
-                na água, formando flocos que podem ser separados por
-                decantação.
-            </p>
-
-            <h3>Cloração</h3>
-
-            <p>
-                Na desinfecção, compostos à base de cloro são utilizados
-                para inativar microrganismos.
-            </p>
-
-            <p>
-                Quando o cloro molecular entra em contato com a água, pode
-                ocorrer a formação de ácido hipocloroso:
-            </p>
-
-            <div class="formula">
-                Cl₂ + H₂O ⇌ HCl + HClO
-            </div>
-
-            <p>
-                O ácido hipocloroso (HClO) possui ação desinfetante e
-                contribui para a eliminação de diversos microrganismos.
-            </p>
-
-            <h3>pH</h3>
-
-            <p>
-                O pH indica se uma solução é ácida, neutra ou básica.
-                Durante o tratamento, seu controle é importante porque
-                diferentes processos químicos funcionam melhor em
-                determinadas condições de pH.
+                A água é retirada de rios, represas ou outras fontes
+                utilizadas para o abastecimento.
             </p>
 
         </div>
-    </section>
 
-    <!-- ESGOTO -->
-    <section id="esgoto">
-        <h2>3. Tratamento do esgoto</h2>
+
+        <div class="etapa">
+
+            <strong>2. Coagulação</strong>
+
+            <p>
+                Produtos químicos ajudam a reunir pequenas partículas
+                presentes na água.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>3. Floculação</strong>
+
+            <p>
+                As partículas se unem e formam flocos maiores.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>4. Decantação</strong>
+
+            <p>
+                Os flocos se depositam no fundo dos tanques pela ação
+                da gravidade.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>5. Filtração</strong>
+
+            <p>
+                A água passa por filtros que retêm partículas que
+                permaneceram após a decantação.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>6. Desinfecção</strong>
+
+            <p>
+                Substâncias à base de cloro são utilizadas para
+                inativar diversos microrganismos.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>7. Fluoretação</strong>
+
+            <p>
+                O fluoreto pode ser adicionado à água de abastecimento
+                para auxiliar na prevenção de cáries.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     QUÍMICA
+     ========================= -->
+
+<section id="quimica">
+
+    <h2>🧪 2. Química no tratamento da água</h2>
+
+
+    <div class="quimica">
+
+
+        <h3>Coagulação</h3>
 
         <p>
-            O esgoto contém matéria orgânica, sólidos, nutrientes,
-            microrganismos e outras substâncias. Seu tratamento reduz a
-            quantidade de poluentes antes que a água seja devolvida ao
-            ambiente.
+            Na coagulação, produtos químicos são adicionados à água para
+            favorecer a união das partículas muito pequenas que estão
+            suspensas nela.
         </p>
 
-        <div class="etapas">
+        <p>
+            Um dos coagulantes que pode ser utilizado em sistemas de
+            tratamento é o sulfato de alumínio.
+        </p>
 
-            <div class="etapa">
-                <strong>Gradeamento</strong>
-                <p>
-                    Retira objetos maiores, como plásticos e outros resíduos.
-                </p>
+
+        <h3>Floculação</h3>
+
+        <p>
+            Depois da coagulação, a água é misturada lentamente. Isso
+            favorece o encontro das partículas, formando flocos maiores.
+        </p>
+
+
+        <h3>Decantação</h3>
+
+        <p>
+            Os flocos formados possuem maior massa e podem se depositar
+            no fundo do tanque pela ação da gravidade.
+        </p>
+
+
+        <h3>Desinfecção e cloro</h3>
+
+        <p>
+            O cloro é muito importante para a desinfecção da água.
+            Quando o cloro molecular entra em contato com a água,
+            pode ocorrer a formação de ácido hipocloroso.
+        </p>
+
+
+        <div class="formula">
+
+            Cl₂ + H₂O ⇌ HCl + HClO
+
+        </div>
+
+
+        <p>
+            O ácido hipocloroso (HClO) possui ação desinfetante e
+            contribui para a inativação de diversos microrganismos.
+        </p>
+
+
+        <h3>pH</h3>
+
+        <p>
+            O pH indica se uma solução apresenta caráter ácido, neutro
+            ou básico. O controle do pH é importante porque diferentes
+            processos químicos dependem das condições do meio.
+        </p>
+
+
+        <h3>Concentração</h3>
+
+        <p>
+            A concentração representa a quantidade de uma substância
+            presente em determinada quantidade de solução. No tratamento
+            da água, é necessário controlar corretamente a quantidade
+            dos produtos utilizados.
+        </p>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRATAMENTO DO ESGOTO
+     ========================= -->
+
+<section id="esgoto">
+
+    <h2>3. Tratamento do esgoto</h2>
+
+    <p>
+        O esgoto doméstico contém matéria orgânica, sólidos, nutrientes,
+        microrganismos e outras substâncias. O tratamento reduz esses
+        poluentes antes que a água seja devolvida ao ambiente.
+    </p>
+
+
+    <div class="etapas">
+
+
+        <div class="etapa">
+
+            <strong>Gradeamento</strong>
+
+            <p>
+                Retira objetos maiores, como plásticos, papéis e outros
+                resíduos.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>Desarenação</strong>
+
+            <p>
+                Remove areia e partículas mais pesadas presentes no esgoto.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>Decantação</strong>
+
+            <p>
+                Parte dos sólidos presentes no esgoto se deposita no
+                fundo dos tanques.
+            </p>
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>Tratamento biológico</strong>
+
+            <p>
+                Microrganismos ajudam a decompor a matéria orgânica.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <h3>DBO — Demanda Bioquímica de Oxigênio</h3>
+
+    <p>
+        A DBO está relacionada à quantidade de oxigênio necessária para
+        a decomposição biológica da matéria orgânica presente na água.
+    </p>
+
+    <div class="formula">
+
+        Matéria orgânica + O₂ → CO₂ + H₂O + energia
+
+    </div>
+
+
+    <div class="destaque">
+
+        Uma quantidade muito grande de matéria orgânica pode aumentar
+        o consumo de oxigênio da água e prejudicar os organismos
+        aquáticos.
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BIOLOGIA
+     ========================= -->
+
+<section id="biologia">
+
+    <h2>🦠 4. Biologia: contaminação e doenças</h2>
+
+    <p>
+        A Biologia ajuda a compreender os microrganismos presentes na
+        água e no esgoto. Alguns participam da decomposição da matéria
+        orgânica, enquanto outros podem causar doenças.
+    </p>
+
+
+    <table>
+
+        <tr>
+
+            <th>Doença</th>
+
+            <th>Agente causador</th>
+
+            <th>Relação com a água</th>
+
+        </tr>
+
+
+        <tr>
+
+            <td>Cólera</td>
+
+            <td>Bactéria</td>
+
+            <td>
+                Pode ocorrer pela ingestão de água ou alimentos
+                contaminados.
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>Leptospirose</td>
+
+            <td>Bactéria</td>
+
+            <td>
+                Pode ocorrer pelo contato com água ou lama contaminada.
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>Hepatite A</td>
+
+            <td>Vírus</td>
+
+            <td>
+                Pode ser transmitida pela ingestão de água ou alimentos
+                contaminados.
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>Giardíase</td>
+
+            <td>Protozoário</td>
+
+            <td>
+                Pode ocorrer pela ingestão de água contaminada.
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>Amebíase</td>
+
+            <td>Protozoário</td>
+
+            <td>
+                Pode ser transmitida por água ou alimentos contaminados.
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>Esquistossomose</td>
+
+            <td>Verme parasita</td>
+
+            <td>
+                Está relacionada ao contato com água doce onde ocorre
+                o ciclo do parasita.
+            </td>
+
+        </tr>
+
+
+    </table>
+
+</section>
+
+
+<!-- =========================
+     MATEMÁTICA
+     ========================= -->
+
+<section id="matematica">
+
+    <h2>📊 5. Matemática e análise de dados</h2>
+
+    <p>
+        A Matemática permite analisar dados sobre saneamento por meio
+        de porcentagens, tabelas e gráficos. Dessa maneira, podemos
+        comparar diferentes cidades.
+    </p>
+
+
+    <h3>Porcentagem</h3>
+
+    <div class="formula">
+
+        Porcentagem = (parte ÷ total) × 100
+
+    </div>
+
+
+    <p>
+        Por exemplo, se 90.000 pessoas de uma população de 100.000
+        possuem acesso à água tratada:
+    </p>
+
+
+    <div class="formula">
+
+        (90.000 ÷ 100.000) × 100 = 90%
+
+    </div>
+
+
+    <!-- =========================
+         GRÁFICO
+         ========================= -->
+
+    <h3>Gráfico: água tratada e coleta de esgoto</h3>
+
+    <p>
+        O gráfico compara os índices de água tratada e coleta de esgoto
+        de Maringá, Curitiba e Londrina.
+    </p>
+
+
+    <div class="grafico">
+
+
+        <!-- MARINGÁ -->
+
+        <div class="cidade">
+
+            <h4>Maringá</h4>
+
+
+            <div class="barra-linha">
+
+                <span class="legenda">
+                    Água tratada — 93,1%
+                </span>
+
+                <div class="barra">
+
+                    <div
+                        class="barra-agua"
+                        style="width: 93.1%;">
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="etapa">
-                <strong>Desarenação</strong>
-                <p>
-                    Remove areia e partículas mais pesadas.
-                </p>
+
+            <div class="barra-linha">
+
+                <span class="legenda">
+                    Coleta de esgoto — 99,5%
+                </span>
+
+                <div class="barra">
+
+                    <div
+                        class="barra-esgoto"
+                        style="width: 99.5%;">
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="etapa">
-                <strong>Decantação</strong>
-                <p>
-                    Parte dos sólidos se deposita no fundo dos tanques.
-                </p>
+        </div>
+
+
+        <!-- CURITIBA -->
+
+        <div class="cidade">
+
+            <h4>Curitiba</h4>
+
+
+            <div class="barra-linha">
+
+                <span class="legenda">
+                    Água tratada — 99,6%
+                </span>
+
+                <div class="barra">
+
+                    <div
+                        class="barra-agua"
+                        style="width: 99.6%;">
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="etapa">
-                <strong>Tratamento biológico</strong>
-                <p>
-                    Microrganismos ajudam a decompor a matéria orgânica.
-                </p>
+
+            <div class="barra-linha">
+
+                <span class="legenda">
+                    Coleta de esgoto — 96,9%
+                </span>
+
+                <div class="barra">
+
+                    <div
+                        class="barra-esgoto"
+                        style="width: 96.9%;">
+                    </div>
+
+                </div>
+
             </div>
+
+        </div>
+
+
+        <!-- LONDRINA -->
+
+        <div class="cidade">
+
+            <h4>Londrina</h4>
+
+
+            <div class="barra-linha">
+
+                <span class="legenda">
+                    Água tratada — 98,2%
+                </span>
+
+                <div class="barra">
+
+                    <div
+                        class="barra-agua"
+                        style="width: 98.2%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="barra-linha">
+
+                <span class="legenda">
+                    Coleta de esgoto — 96,7%
+                </span>
+
+                <div class="barra">
+
+                    <div
+                        class="barra-esgoto"
+                        style="width: 96.7%;">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEGENDA -->
+
+        <div class="legenda-grafico">
+
+            <span class="item-legenda">
+
+                <span class="quadrado-agua"></span>
+
+                Água tratada
+
+            </span>
+
+
+            <span class="item-legenda">
+
+                <span class="quadrado-esgoto"></span>
+
+                Coleta de esgoto
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- TABELA DOS DADOS DO GRÁFICO -->
+
+    <h3>Dados utilizados no gráfico</h3>
+
+
+    <table>
+
+        <tr>
